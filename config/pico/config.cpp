@@ -129,15 +129,15 @@ void setup() {
         backends = new CommunicationBackend *[backend_count] { primary_backend };
     }
 
-    // Default to Melee mode if A button not held
-    if (!button_holds.a) {
+    // Default to Melee for Gamecube
+    if (console == ConnectedConsole::GAMECUBE) {
         primary_backend->SetGameMode(
         new Melee20Button(socd::SOCD_2IP_NO_REAC, { .crouch_walk_os = false }) 
         );
     }
-    else {
+    else { // Default to Rivals2
         primary_backend->SetGameMode(
-        new Smash64(socd::SOCD_2IP, { .c_stick_time = 5 })
+        new Rivals2(socd::SOCD_2IP)
         );
     }
 }
